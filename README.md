@@ -37,6 +37,21 @@ they were dropped:
 | 13 | All Oricorio forms | ✅ `scripts/13-oricorio-forms.c` |
 | 14 | All Rotom forms | ✅ `scripts/14-rotom-forms.c` |
 | 15 | All event Pokémon | ✅ `scripts/15-event-pokemon.c` |
+| 16 | Bulk sanity / compatibility check | ✅ `scripts/16-bulk-legality-check.c` |
+
+## Script 16 — Bulk sanity / compatibility check
+
+Scans **every Pokémon in all boxes** and writes a report to
+`/3ds/PKSM/legality-report.txt`, flagging anything whose species, ability,
+held item, Poké Ball, or moves **don't exist in Ultra Moon** (catches
+cross-gen contamination), plus shiny-on-shiny-locked and out-of-range levels.
+
+It is **not** a full PKHeX-grade legality check. PKSM does not expose its real
+legality checker (the per-Pokémon "Legality" button that uses your configured
+API URL) to scripts, and scripts can't read HTTP responses back, so a script
+can't call your legality API and collect verdicts. Use this as a fast bulk
+pre-filter, then run the built-in Legality button (your API) on flagged mons,
+or check them in PKHeX.
 
 ## Common behaviour (Scripts 1–14)
 
