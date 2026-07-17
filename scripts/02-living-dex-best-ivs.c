@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 /*
  * Script 2 - Full Living Dex, best IVs / natures / abilities (Ultra Moon)

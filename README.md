@@ -88,25 +88,20 @@ data instead of overwriting it with Cole.
 Files from other generations should be brought over with PKSM's transfer tools
 rather than this script.
 
-## Building the scripts
-
-These are **C scripts**, which require **PKSM v6.0.0+** on CFW. Compile the
-`.c` files to `.pksm` with FlagBrew's build toolchain:
-
-1. Clone [`FlagBrew/PKSM-Scripts`](https://github.com/FlagBrew/PKSM-Scripts).
-2. Copy the `.c` files from `scripts/` here into that repo's `src/` tree
-   (e.g. `src/universal/`) so they can `#include <pksm.h>`.
-3. Build with the provided tooling (`dev/python` or `dev/node` — see that
-   repo's `dev/README.md`). This emits the compiled `.pksm` files.
-
 ## Installing / running on the 3DS
 
-1. Put the compiled `.pksm` files under
-   `/3ds/PKSM/scripts/<folder>/` on your SD card.
-2. Open PKSM → **Scripts**, browse to them and run each on your Ultra Moon save.
+**There is nothing to compile.** These are **C (picoC) scripts** and PKSM runs
+them directly with its built-in interpreter — you just copy the `.c` files onto
+the SD card. They require **PKSM v6.0.0+** on CFW (needed for C scripts).
+
+1. Copy the `.c` files from `scripts/` into `/3ds/PKSM/scripts/usum/` on your SD
+   card. (The `usum` folder is what PKSM reads when an Ultra Sun / Ultra Moon
+   save is loaded.) For Script 15, also create `/3ds/PKSM/events/`.
+2. Open PKSM → load your Ultra Moon save → **Scripts** → `usum`, and run each.
 3. **Save** in PKSM to write changes back.
-4. Before running: **back up your save** (PKSM does this automatically, but keep
-   your own copy) and make sure the target boxes are empty.
+4. Before running: **back up your save** and empty the boxes you're filling —
+   scripts write from Box 1 and overwrite those slots.
+5. Verify results in [PKHeX](https://github.com/kwsch/PKHeX) before online use.
 
 ## Sources
 
