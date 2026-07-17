@@ -97,7 +97,10 @@ the SD card. They require **PKSM v6.0.0+** on CFW (needed for C scripts).
 1. Copy the `.c` files from `scripts/` into `/3ds/PKSM/scripts/usum/` on your SD
    card. (The `usum` folder is what PKSM reads when an Ultra Sun / Ultra Moon
    save is loaded.) For Script 15, also create `/3ds/PKSM/events/`.
-2. Open PKSM → load your Ultra Moon save → **Scripts** → `usum`, and run each.
+2. Open PKSM → load your Ultra Moon save → **Scripts**. The menu opens on
+   PKSM's **built-in** scripts by default — **press `X` to switch to the SD
+   card**, otherwise you won't see these. Then pick a script and press `A`.
+   (`Y` toggles the `usum`/`universal` folders; `B` goes up a level.)
 3. **Save** in PKSM to write changes back.
 4. Before running: **back up your save** and empty the boxes you're filling —
    scripts write from Box 1 and overwrite those slots.
