@@ -6,25 +6,26 @@
 /*
  * Script 15 - Legal Event Pokemon (Ultra Moon)
  * ---------------------------------------------------------------------------
- * The ONLY way an event Pokemon is completely legal is with its real,
- * original event data: the correct OT name, Trainer ID/SID, met date,
- * fateful-encounter flag and event ribbon. Those values are baked into the
- * official distribution files - they cannot be re-created by setting fields by
- * hand, and they are NOT owned by "Cole".
+ * A real event Pokemon is only legal with its original event data (OT name,
+ * Trainer ID/SID, met date, fateful flag, event ribbon). Those values are
+ * baked into the official distribution files and cannot be recreated by hand,
+ * so this script injects REAL event files from a folder:
  *
- * So this script injects REAL event files that you drop into a folder:
+ *      /3ds/PKSM/events
  *
- *   1. Create the folder:            /3ds/PKSM/events
- *   2. Put your Gen VII event files there:
- *        *.pk7  - event Pokemon dumps -> injected into your BOXES (start box 1)
- *        *.wc7  - Wonder Cards        -> injected into your Mystery Gift album
- *      (Get these from a reputable event archive, e.g. the community
- *       "Wondercard Database" / event .pk7 collections.)
- *   3. Run this script.
+ *   *.wc7full / *.wc7  - Wonder Cards -> injected into your Mystery Gift album.
+ *                        Redeem them in-game at the delivery girl in any
+ *                        Pokemon Center to get the (fully legal) Pokemon.
+ *   *.pk7              - event Pokemon dumps -> injected straight into BOXES
+ *                        (from Box 1), if you have any.
  *
- * Every injected Pokemon keeps its genuine event data, so it stays legal.
- * Files from other generations should be brought in with PKSM's transfer
- * tools instead; this script only handles Gen VII (.pk7 / .wc7).
+ * This pack ships pre-loaded with the English Gen VII event Wonder Cards that
+ * are redeemable on Ultra Moon (from the ProjectPokemon Events Gallery). Add
+ * or remove files in the folder to taste.
+ *
+ * NOTE: the Mystery Gift album holds a limited number of cards. If there are
+ * more cards than free slots, this injects as many as fit and tells you how
+ * many are left - redeem those in-game, then run again for the rest.
  * ---------------------------------------------------------------------------
  */
 
@@ -69,14 +70,17 @@ int main(int argc, char** argv)
     char* data;
     char* name;
     int i, size, slot;
-    int boxSlot = 0;      /* running box/slot index for .pk7 */
-    int pkCount = 0;
-    int wcCount = 0;
+    int boxSlot   = 0;   /* running box/slot index for .pk7 */
+    int pkCount   = 0;
+    int wcCount   = 0;
+    int wcSkipped = 0;   /* wonder cards left because the album was full */
+    int albumFull = 0;
+    char msg[192];
 
     dir = read_directory(EVENT_DIR);
     if (dir == NULL || dir->count == 0)
     {
-        gui_warn("No files found in:\n" EVENT_DIR "\n\nPut legal .pk7 / .wc7 event\nfiles there, then run again.");
+        gui_warn("No files found in:\n" EVENT_DIR "\n\nPut .wc7full / .wc7 / .pk7\nevent files there, then run again.");
         if (dir != NULL)
             delete_directory(dir);
         return 0;
@@ -98,15 +102,21 @@ int main(int argc, char** argv)
             boxSlot++;
             pkCount++;
         }
-        else if (ends_with(name, ".wc7"))
+        else if (ends_with(name, ".wc7full") || ends_with(name, ".wc7"))
         {
+            slot = sav_wcx_free_slot();
+            if (slot < 0)
+            {
+                /* Mystery Gift album is full - count the rest and move on */
+                albumFull = 1;
+                wcSkipped++;
+                continue;
+            }
             data = read_file(name, &size);
             if (data == NULL)
                 continue;
-            slot = sav_wcx_free_slot();
-            if (slot < 0)
-                slot = 0;
-            sav_inject_wcx(data, GEN_SEVEN, slot, 0);
+            /* alternateFormat: 1 for the 784-byte .wc7full, 0 for the 264-byte .wc7 */
+            sav_inject_wcx(data, GEN_SEVEN, slot, ends_with(name, ".wc7full") ? 1 : 0);
             free(data);
             wcCount++;
         }
@@ -114,14 +124,18 @@ int main(int argc, char** argv)
     sav_box_encrypt();
     delete_directory(dir);
 
-    if (pkCount == 0 && wcCount == 0)
+    if (pkCount == 0 && wcCount == 0 && wcSkipped == 0)
     {
-        gui_warn("No .pk7 or .wc7 files found in:\n" EVENT_DIR);
+        gui_warn("No .wc7full / .wc7 / .pk7 files found in:\n" EVENT_DIR);
+    }
+    else if (albumFull)
+    {
+        sprintf(msg, "Events injected!\n%d Wonder Cards -> Mystery Gift\n%d Pokemon (.pk7) -> boxes\n\nAlbum full: %d cards left over.\nRedeem in-game, then run again.", wcCount, pkCount, wcSkipped);
+        gui_warn(msg);
     }
     else
     {
-        char msg[128];
-        sprintf(msg, "Events injected!\n%d Pokemon (.pk7) -> boxes\n%d Wonder Cards (.wc7)\nOriginal event data kept (legal).", pkCount, wcCount);
+        sprintf(msg, "Events injected!\n%d Wonder Cards -> Mystery Gift\n%d Pokemon (.pk7) -> boxes\n\nRedeem the Wonder Cards in-game\nat the delivery girl (Pokemon Center).", wcCount, pkCount);
         gui_warn(msg);
     }
     return 0;

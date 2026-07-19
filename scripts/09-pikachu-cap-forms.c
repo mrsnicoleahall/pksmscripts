@@ -15,10 +15,10 @@
  * These cap Pikachu are SHINY-LOCKED event Pokemon, so only non-shiny copies
  * are made (a shiny cap Pikachu is not legal).
  *
- *   Trainer (OT) : Cole (Female)   IVs: 31   TID/SID: random (one set/run)
+ *   Trainer (OT) : cole (Female)   IVs: 31   TID/SID: random (one set/run)
  *
  * Legality note: real cap Pikachu are fateful-encounter event distributions
- * with fixed OT/ID/ribbon data. This makes ordinary Cole-owned cap Pikachu,
+ * with fixed OT/ID/ribbon data. This makes ordinary cole-owned cap Pikachu,
  * which will read as illegal in a strict checker. For a legal cap Pikachu use
  * the real event file via Script 15. Verify in PKHeX.
  * ---------------------------------------------------------------------------
@@ -45,10 +45,13 @@ int main(int argc, char** argv)
         pkx_generate(pkmn, SPECIES);
         pkx_set_value(pkmn, GEN_SEVEN, FORM, f);
 
-        pkx_set_value(pkmn, GEN_SEVEN, OT_NAME, "Cole");
+        pkx_set_value(pkmn, GEN_SEVEN, OT_NAME, "cole");
         pkx_set_value(pkmn, GEN_SEVEN, OT_GENDER, 1);
         pkx_set_value(pkmn, GEN_SEVEN, TID, tid);
         pkx_set_value(pkmn, GEN_SEVEN, SID, sid);
+        pkx_set_value(pkmn, GEN_SEVEN, MET_YEAR, cfg_default_year());
+        pkx_set_value(pkmn, GEN_SEVEN, MET_MONTH, cfg_default_month());
+        pkx_set_value(pkmn, GEN_SEVEN, MET_DAY, cfg_default_day());
 
         pkx_set_value(pkmn, GEN_SEVEN, IV_HP, 31);
         pkx_set_value(pkmn, GEN_SEVEN, IV_ATK, 31);
@@ -67,6 +70,6 @@ int main(int argc, char** argv)
     }
     sav_box_encrypt();
 
-    gui_warn("All 7 cap Pikachu forms injected!\nOT: Cole (Female)\nNon-shiny only (shiny-locked).\nUse Script 15 for legal event copies.");
+    gui_warn("All 7 cap Pikachu forms injected!\nOT: cole (Female)\nNon-shiny only (shiny-locked).\nUse Script 15 for legal event copies.");
     return 0;
 }

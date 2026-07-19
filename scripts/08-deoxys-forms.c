@@ -11,7 +11,7 @@
  *   0 Normal, 1 Attack, 2 Defense, 3 Speed.
  * All shiny copies first, then all non-shiny copies (Deoxys can be shiny).
  *
- *   Trainer (OT) : Cole (Female)   IVs: 31   TID/SID: random (one set/run)
+ *   Trainer (OT) : cole (Female)   IVs: 31   TID/SID: random (one set/run)
  *
  * Legality note: Deoxys is a transfer-only Mythical in Gen VII; its forme is
  * changed in-game by the meteorite shards. Verify in PKHeX.
@@ -41,10 +41,13 @@ int main(int argc, char** argv)
             pkx_generate(pkmn, SPECIES);
             pkx_set_value(pkmn, GEN_SEVEN, FORM, f);
 
-            pkx_set_value(pkmn, GEN_SEVEN, OT_NAME, "Cole");
+            pkx_set_value(pkmn, GEN_SEVEN, OT_NAME, "cole");
             pkx_set_value(pkmn, GEN_SEVEN, OT_GENDER, 1);
             pkx_set_value(pkmn, GEN_SEVEN, TID, tid);
             pkx_set_value(pkmn, GEN_SEVEN, SID, sid);
+            pkx_set_value(pkmn, GEN_SEVEN, MET_YEAR, cfg_default_year());
+            pkx_set_value(pkmn, GEN_SEVEN, MET_MONTH, cfg_default_month());
+            pkx_set_value(pkmn, GEN_SEVEN, MET_DAY, cfg_default_day());
 
             pkx_set_value(pkmn, GEN_SEVEN, IV_HP, 31);
             pkx_set_value(pkmn, GEN_SEVEN, IV_ATK, 31);
@@ -64,6 +67,6 @@ int main(int argc, char** argv)
     }
     sav_box_encrypt();
 
-    gui_warn("All 4 Deoxys formes injected!\nOT: Cole (Female)\nShiny copies first, then non-shiny.");
+    gui_warn("All 4 Deoxys formes injected!\nOT: cole (Female)\nShiny copies first, then non-shiny.");
     return 0;
 }

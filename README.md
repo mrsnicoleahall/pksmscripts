@@ -1,8 +1,8 @@
-# PKSM Ultra Moon Scripts — Cole
+# PKSM Ultra Moon Scripts — cole
 
 A batch of [PKSM](https://github.com/FlagBrew/PKSM) C scripts (picoC) for a
 **Pokémon Ultra Moon** save (Generation VII, game version `33`). Every script
-sets the trainer to **Cole (Female)** with randomised Trainer IDs.
+sets the trainer to **cole (Female)** with randomised Trainer IDs.
 
 > ⚠️ **Legality disclaimer.** These use PKSM's own Pokémon generator (the same
 > basis as FlagBrew's built-in *Living Dex* script) plus curated shiny-lock /
@@ -55,7 +55,7 @@ or check them in PKHeX.
 
 ## Common behaviour (Scripts 1–14)
 
-- **OT name:** `Cole`, **OT gender:** Female.
+- **OT name:** `cole`, **OT gender:** Female.
 - **Trainer IDs:** one random TID + SID generated per run and applied to the
   whole batch (a single trainer's Pokémon). Re-run for a different pair.
 - **IVs:** 31 in every stat (best possible — always legal).
@@ -85,10 +85,10 @@ or check them in PKHeX.
 
 ## Script 15 — Legal event Pokémon (read this)
 
-"All event Pokémon, completely legal" **cannot** also be Cole-owned: a real
+"All event Pokémon, completely legal" **cannot** also be cole-owned: a real
 event mon is only legal with its original OT/ID/date/ribbon/fateful data, which
 is fixed in the official distribution file. So this script keeps the genuine
-data instead of overwriting it with Cole.
+data instead of overwriting it with cole.
 
 **How to use it:**
 

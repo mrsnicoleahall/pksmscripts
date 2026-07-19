@@ -10,7 +10,7 @@
  * Unown (#201) has 28 forms: A-Z (0-25), ! (26) and ? (27).
  * All shiny copies first, then all non-shiny copies.
  *
- *   Trainer (OT) : Cole (Female)   IVs: 31   TID/SID: random (one set/run)
+ *   Trainer (OT) : cole (Female)   IVs: 31   TID/SID: random (one set/run)
  *
  * Legality note: Unown cannot be caught in Gen VII, so a real one must be a
  * transfer from an earlier game. This makes a Gen-VII-origin Unown; it is fine
@@ -42,10 +42,13 @@ int main(int argc, char** argv)
             pkx_generate(pkmn, SPECIES);
             pkx_set_value(pkmn, GEN_SEVEN, FORM, f);
 
-            pkx_set_value(pkmn, GEN_SEVEN, OT_NAME, "Cole");
+            pkx_set_value(pkmn, GEN_SEVEN, OT_NAME, "cole");
             pkx_set_value(pkmn, GEN_SEVEN, OT_GENDER, 1);
             pkx_set_value(pkmn, GEN_SEVEN, TID, tid);
             pkx_set_value(pkmn, GEN_SEVEN, SID, sid);
+            pkx_set_value(pkmn, GEN_SEVEN, MET_YEAR, cfg_default_year());
+            pkx_set_value(pkmn, GEN_SEVEN, MET_MONTH, cfg_default_month());
+            pkx_set_value(pkmn, GEN_SEVEN, MET_DAY, cfg_default_day());
 
             pkx_set_value(pkmn, GEN_SEVEN, IV_HP, 31);
             pkx_set_value(pkmn, GEN_SEVEN, IV_ATK, 31);
@@ -65,6 +68,6 @@ int main(int argc, char** argv)
     }
     sav_box_encrypt();
 
-    gui_warn("All 28 Unown forms injected!\nOT: Cole (Female)\nShiny copies first, then non-shiny.");
+    gui_warn("All 28 Unown forms injected!\nOT: cole (Female)\nShiny copies first, then non-shiny.");
     return 0;
 }

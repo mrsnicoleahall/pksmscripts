@@ -11,7 +11,7 @@
  * one per box slot. Every species is made shiny EXCEPT those that can never be
  * legally shiny (shiny-locked), which are generated non-shiny instead.
  *
- *   Trainer (OT) : Cole (Female)
+ *   Trainer (OT) : cole (Female)
  *   Trainer IDs  : randomised once per run (one TID/SID for the whole box)
  *   IVs          : 31 in every stat (best possible - always legal)
  *   Ball / moves / met data : PKSM legal defaults for each species
@@ -94,10 +94,13 @@ int main(int argc, char** argv)
 
         pkx_generate(pkmn, species);
 
-        pkx_set_value(pkmn, GEN_SEVEN, OT_NAME, "Cole");
+        pkx_set_value(pkmn, GEN_SEVEN, OT_NAME, "cole");
         pkx_set_value(pkmn, GEN_SEVEN, OT_GENDER, 1);           /* 1 = Female */
         pkx_set_value(pkmn, GEN_SEVEN, TID, tid);
         pkx_set_value(pkmn, GEN_SEVEN, SID, sid);
+        pkx_set_value(pkmn, GEN_SEVEN, MET_YEAR, cfg_default_year());
+        pkx_set_value(pkmn, GEN_SEVEN, MET_MONTH, cfg_default_month());
+        pkx_set_value(pkmn, GEN_SEVEN, MET_DAY, cfg_default_day());
 
         pkx_set_value(pkmn, GEN_SEVEN, IV_HP, 31);
         pkx_set_value(pkmn, GEN_SEVEN, IV_ATK, 31);
@@ -115,6 +118,6 @@ int main(int argc, char** argv)
     }
     sav_box_encrypt();
 
-    gui_warn("Shiny living Dex generated!\nOT: Cole (Female)\nShiny-locked species were made non-shiny.\nVerify in PKHeX before online use.");
+    gui_warn("Shiny living Dex generated!\nOT: cole (Female)\nShiny-locked species were made non-shiny.\nVerify in PKHeX before online use.");
     return 0;
 }
