@@ -38,6 +38,32 @@ they were dropped:
 | 14 | All Rotom forms | ✅ `scripts/14-rotom-forms.c` |
 | 15 | All event Pokémon | ✅ `scripts/15-event-pokemon.c` |
 | 16 | Bulk sanity / compatibility check | ✅ `scripts/16-bulk-legality-check.c` |
+| 17 | **Data-driven shiny living Dex (recommended)** | ✅ `scripts/17-shiny-dex-inject.c` |
+
+## Script 17 — Data-driven shiny living Dex (recommended over Script 1)
+
+Script 1 builds Pokémon on-device with `pkx_generate`, which only makes a
+default template with placeholder moves (Pound) and no met date — so its output
+is **not legal on its own** and depends on an external legalizer, which chokes
+on the newest species.
+
+Script 17 fixes that by injecting **pre-built, PKHeX-verified-legal `.pk7`
+files** (in `/3ds/PKSM/shinydex/`). Those files were generated with PKHeX.Core's
+real legality engine (source in `tools/dexgen/`): for each species it finds a
+legal encounter, transfers/evolves it up to a USUM-legal PK7 owned by **cole**,
+makes it shiny **only where the engine confirms a legal shiny exists**, maxes
+IVs where legal, and verifies every one with `LegalityAnalysis` before export.
+
+- **807/807 pass PKHeX legality.** 789 are shiny.
+- The 18 non-shiny are species with no legal shiny the engine could produce
+  (shiny-locked mythicals/legendaries, plus a few Gen 3/4-origin species whose
+  shiny needs RNG-frame search).
+- ~20 event-only species (Mew, the Tapus, Zeraora, …) keep their **real event
+  OT** instead of `cole`, because that's the only way they're legal.
+- Each mon is placed at its National Dex slot (Boxes 1–27), read from the file.
+
+To regenerate the set yourself: `cd tools/dexgen && dotnet run -c Release -- out`
+(needs .NET 10 + the `PKHeX.Core` NuGet package).
 
 ## Script 16 — Bulk sanity / compatibility check
 
