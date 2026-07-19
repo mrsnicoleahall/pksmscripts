@@ -48,22 +48,20 @@ is **not legal on its own** and depends on an external legalizer, which chokes
 on the newest species.
 
 Script 17 fixes that by injecting **pre-built, PKHeX-verified-legal `.pk7`
-files** (in `/3ds/PKSM/shinydex/`). Those files were generated with PKHeX.Core's
-real legality engine (source in `tools/dexgen/`): for each species it finds a
-legal encounter, transfers/evolves it up to a USUM-legal PK7 owned by **cole**,
-makes it shiny **only where the engine confirms a legal shiny exists**, maxes
-IVs where legal, and verifies every one with `LegalityAnalysis` before export.
+files** (in `/3ds/PKSM/shinydex/`). The set was sourced from a verified-legal
+community shiny living-dex save; each Pokémon was **re-OT'd to `cole` (female)**
+wherever that keeps it legal, and every file is checked with `LegalityAnalysis`.
 
-- **807/807 pass PKHeX legality.** 789 are shiny.
-- The 18 non-shiny are species with no legal shiny the engine could produce
-  (shiny-locked mythicals/legendaries, plus a few Gen 3/4-origin species whose
-  shiny needs RNG-frame search).
-- ~20 event-only species (Mew, the Tapus, Zeraora, …) keep their **real event
-  OT** instead of `cole`, because that's the only way they're legal.
+- **807/807 pass PKHeX legality.** 797 are shiny; 784 owned by **cole**.
+- The 10 non-shiny are the species with no legal shiny (Victini, Keldeo,
+  Meloetta, Hoopa, Volcanion, Cosmog, Cosmoem, Magearna, Marshadow, Zeraora).
+- 23 event-only species (Mewtwo, Jirachi, Arceus, the Tapus, Zeraora, …) keep
+  their **real event OT** — that's the only way they're legal.
 - Each mon is placed at its National Dex slot (Boxes 1–27), read from the file.
 
-To regenerate the set yourself: `cd tools/dexgen && dotnet run -c Release -- out`
-(needs .NET 10 + the `PKHeX.Core` NuGet package).
+`tools/dexgen/` also holds a from-scratch generator (PKHeX.Core + .NET 10) that
+builds a legal dex without a source save (789 shiny) — kept for reference; the
+shipped set above is the save-derived one.
 
 ## Script 16 — Bulk sanity / compatibility check
 

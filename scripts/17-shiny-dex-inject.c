@@ -10,11 +10,11 @@
  * pkx_generate (which only makes a default template and leaves illegal
  * placeholder moves), this injects PRE-BUILT, PKHeX-verified-legal .pk7 files.
  *
- * Every file in this set was generated with PKHeX.Core's real legality engine:
- * a legal encounter for each species is found, transferred/evolved up to a
- * USUM-legal PK7 owned by "cole", made shiny only where the engine confirms a
- * legal shiny is possible, IVs maxed where legal, and each one is checked with
- * LegalityAnalysis before export. Result: 807/807 legal, 789 shiny.
+ * Every file in this set is PKHeX-verified legal. The set was sourced from a
+ * verified-legal community shiny dex and each Pokemon was re-OT'd to "cole"
+ * (female) wherever that keeps it legal; event-only species keep their real
+ * event OT (that is the only way they are legal). Every file is checked with
+ * LegalityAnalysis. Result: 807/807 legal, 797 shiny, 784 owned by cole.
  *
  * USAGE
  *   1. Copy the .pk7 files to:   /3ds/PKSM/shinydex
