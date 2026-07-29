@@ -24,7 +24,7 @@
  * ---------------------------------------------------------------------------
  */
 
-#define SPECIES 25
+#define DEXNO 25
 
 int main(int argc, char** argv)
 {
@@ -42,7 +42,7 @@ int main(int argc, char** argv)
     /* Non-shiny only (cap Pikachu are shiny-locked). Forms 1..7. */
     for (f = 1; f <= 7; f++)
     {
-        pkx_generate(pkmn, SPECIES);
+        pkx_generate(pkmn, DEXNO);
         pkx_set_value(pkmn, GEN_SEVEN, FORM, f);
 
         pkx_set_value(pkmn, GEN_SEVEN, OT_NAME, "cole");
@@ -62,7 +62,7 @@ int main(int argc, char** argv)
 
         pkx_set_value(pkmn, GEN_SEVEN, SHINY, 0);
 
-        pkx_set_value(pkmn, GEN_SEVEN, NICKNAME, i18n_species(SPECIES));
+        pkx_set_value(pkmn, GEN_SEVEN, NICKNAME, i18n_species(DEXNO));
         pkx_set_value(pkmn, GEN_SEVEN, NICKNAMED, 0);
 
         sav_inject_pkx(pkmn, GEN_SEVEN, slot / 30, slot % 30, 0);
